@@ -3,6 +3,8 @@
 import { FC, useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "~/constants/api-url";
+import { StoryComponent } from "~/components/story-component";
+import { Story } from "~/types";
 
 export const NewsFeed: FC = () => {
   const [bestStories, setBestStories] = useState([]);
@@ -21,5 +23,11 @@ export const NewsFeed: FC = () => {
     fetchBestStories();
   }, []);
 
-  return <div>{JSON.stringify(bestStories, null, 2)}</div>;
+  return (
+    <div className="grid grid-flow-row gap-2">
+      {bestStories.map((story: Story) => (
+        <StoryComponent story={story} key={story.id} />
+      ))}
+    </div>
+  );
 };
