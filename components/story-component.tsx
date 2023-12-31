@@ -21,14 +21,14 @@ export const StoryComponent: FC<StoryComponentProps> = ({ story }) => {
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
               by {story.by} {story.time}
             </span>
-            <span className="font-semibold">{story.title}</span>
+            <p className="font-semibold break-words">{story.title}</p>
           </div>
           <div className="grid grid-flow-col gap-1 place-items-center w-max">
             {shortenUrl(story.url) && (
               <a className="cursor-pointer">
                 <div className="grid grid-cols-[max-content_max-content] place-items-center gap-1 text-blue-500 hover:bg-blue-500/20 duration-300 ease-in-out p-1 w-max rounded-md">
                   <ExternalLink className="w-4 h-4" />
-                  <span>{shortenUrl(story.url)}</span>
+                  <p className="max-w-[100px] sm:max-w-[160px] md:max-w-none truncate">{shortenUrl(story.url)}</p>
                 </div>
               </a>
             )}
@@ -36,7 +36,7 @@ export const StoryComponent: FC<StoryComponentProps> = ({ story }) => {
               <div className="grid grid-cols-[max-content_max-content] place-items-center gap-1 hover:bg-gray-500/20 dark:hover:bg-white/20 duration-300 ease-in-out p-1 w-max rounded-md">
                 <MessagesSquare className="w-4 h-4" />
                 <span>
-                  {story.descendants} <span className="hidden sm:bloc">comments</span>
+                  {story.descendants} <span className="hidden sm:inline-block">comments</span>
                 </span>
               </div>
             </Link>
