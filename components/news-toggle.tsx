@@ -8,7 +8,7 @@ import { NewsMode } from "~/types";
 
 const map = {
   "best-stories": { text: "Best Stories", icon: <Trophy className="w-4 h-4" /> },
-  "news-stories": { text: "News Stories", icon: <Newspaper className="w-4 h-4" /> },
+  "new-stories": { text: "News Stories", icon: <Newspaper className="w-4 h-4" /> },
   newest: { text: "Newest", icon: <BellRing className="w-4 h-4" /> }
 };
 
