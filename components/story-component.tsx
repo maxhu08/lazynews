@@ -3,6 +3,7 @@ import { Story } from "~/types";
 import { ExternalLink, MessagesSquare, ThumbsUp } from "lucide-react";
 import Link from "next/link";
 import { shortenUrl } from "~/utils/shorten-url";
+import { formatTimeAgo } from "~/utils/format-time";
 
 interface StoryComponentProps {
   story: Story;
@@ -19,7 +20,7 @@ export const StoryComponent: FC<StoryComponentProps> = ({ story }) => {
         <div className="grid grid-flow-row">
           <div className="grid grid-flow-row">
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
-              by {story.by} {story.time}
+              by {story.by} • {formatTimeAgo(story.time)}
             </span>
             <p className="font-semibold break-words">{story.title}</p>
           </div>

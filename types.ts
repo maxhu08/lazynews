@@ -1,3 +1,5 @@
+export type NewsMode = "best-stories" | "news-stories" | "newest";
+
 export interface Story {
   by: string;
   descendants: number;
