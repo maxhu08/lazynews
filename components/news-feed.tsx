@@ -5,16 +5,21 @@ import axios from "axios";
 import { API_URL } from "~/constants/api-url";
 
 export const NewsFeed: FC = () => {
-  const [stories, setStories] = useState<number[]>([]);
+  const [bestStories, setBestStories] = useState([]);
 
   useEffect(() => {
-    const fetchStories = async () => {
-      const { data } = await axios.get(`${API_URL}/v0/beststories.json`);
-      setStories(data);
+    const fetchBestStories = async () => {
+      const { data: bestStoryIds } = await axios.get(`${API_URL}/beststories.json`);
+
+      for (let i = 0; i < 5; i++) {
+        const { data: story } = await axios.get(`${API_URL}/item/${bestStoryIds[i]}.json`);
+        // @ts-expect-error
+        setBestStories(prevStories => [...prevStories, story]);
+      }
     };
 
-    fetchStories();
+    fetchBestStories();
   }, []);
 
-  return <div>{JSON.stringify(stories, null, 2)}</div>;
+  return <div>{JSON.stringify(bestStories, null, 2)}</div>;
 };
