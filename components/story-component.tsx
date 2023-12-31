@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { Story } from "~/types";
-import { ThumbsUp } from "lucide-react";
+import { ExternalLink, MessagesSquare, ThumbsUp } from "lucide-react";
+import Link from "next/link";
+import { shortenUrl } from "~/utils/shorten-url";
 
 interface StoryComponentProps {
   story: Story;
@@ -15,10 +17,28 @@ export const StoryComponent: FC<StoryComponentProps> = ({ story }) => {
           <ThumbsUp className="w-4 h-4" />
         </div>
         <div className="grid grid-flow-row">
-          <span className="text-xs text-zinc-500 dark:text-zinc-400">
-            by {story.by} {story.time}
-          </span>
-          <span>story {story.title}</span>
+          <div className="grid grid-flow-row">
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">
+              by {story.by} {story.time}
+            </span>
+            <span className="font-semibold">story {story.title}</span>
+          </div>
+          <div className="grid grid-flow-col gap-1 place-items-center w-max">
+            {shortenUrl(story.url) && (
+              <a className="cursor-pointer">
+                <div className="grid grid-cols-[max-content_max-content] place-items-center gap-1 text-blue-500 hover:bg-blue-500/20 duration-300 ease-in-out p-1 w-max rounded-md">
+                  <ExternalLink className="w-4 h-4" />
+                  <span>{shortenUrl(story.url)}</span>
+                </div>
+              </a>
+            )}
+            <Link href={`/items/${story.id}`} className="cursor-pointer">
+              <div className="grid grid-cols-[max-content_max-content] place-items-center gap-1 hover:bg-white/20 duration-300 ease-in-out p-1 w-max rounded-md">
+                <MessagesSquare className="w-4 h-4" />
+                <span>{story.descendants} comments</span>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

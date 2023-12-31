@@ -7,15 +7,15 @@ import { StoryComponent } from "~/components/story-component";
 import { Story } from "~/types";
 
 export const NewsFeed: FC = () => {
-  const [bestStories, setBestStories] = useState([]);
+  const [bestStories, setBestStories] = useState<Story[]>([]);
 
   useEffect(() => {
     const fetchBestStories = async () => {
       const { data: bestStoryIds } = await axios.get(`${API_URL}/beststories.json`);
 
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 20; i++) {
         const { data: story } = await axios.get(`${API_URL}/item/${bestStoryIds[i]}.json`);
-        // @ts-expect-error
+
         setBestStories(prevStories => [...prevStories, story]);
       }
     };
@@ -25,7 +25,7 @@ export const NewsFeed: FC = () => {
 
   return (
     <div className="grid grid-flow-row gap-2">
-      {bestStories.map((story: Story) => (
+      {bestStories.map(story => (
         <StoryComponent story={story} key={story.id} />
       ))}
     </div>
