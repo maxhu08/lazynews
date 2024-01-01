@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, Terminal } from "lucide-react";
+import { ChevronLeft, Github, Terminal } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, useEffect, useState } from "react";
@@ -46,15 +46,20 @@ export const Navbar: FC = () => {
   };
 
   return (
-    <nav className="fixed z-20 w-full top-0 ease-in-out backdrop-blur-2xl">
-      <div className="py-2 px-2 md:px-4 grid grid-cols-[1fr_auto_1fr] w-full">
+    <nav className="fixed z-20 w-full top-0 ease-in-out">
+      <div className="py-2 px-2 md:px-4 grid grid-cols-[1fr_auto_1fr] w-full backdrop-blur-2xl">
         <div className="w-max fira-code-font">{navigationControls()}</div>
         <div></div>
-        <div className="ml-auto">
+        <div className="ml-auto grid grid-flow-col gap-1">
+          <a href="https://github.com/maxhu08/lazynews" target="_blank">
+            <div className="text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white duration-200 ease-in-out cursor-pointer">
+              <Github className="w-6 h-6" />
+            </div>
+          </a>
           <ThemeToggle />
         </div>
       </div>
-      <Separator orientation="horizontal" className={cn("transition-all duration-500 mx-auto bg-gray-300 dark:bg-border", scrolled ? "w-full visible" : "w-0 invisible")} />
+      <Separator orientation="horizontal" className={cn("transition-all duration-500 mx-auto bg-zinc-400 dark:!bg-zinc-700", scrolled ? "w-full visible" : "w-0 invisible")} />
     </nav>
   );
 };
