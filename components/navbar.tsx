@@ -46,8 +46,8 @@ export const Navbar: FC = () => {
   };
 
   return (
-    <nav className="fixed z-20 w-full top-0 ease-in-out">
-      <div className="py-2 px-2 md:px-4 grid grid-cols-[1fr_auto_1fr] w-full backdrop-blur-2xl">
+    <nav className="fixed z-20 w-full top-0 ease-in-out bg-neutral-200 dark:bg-neutral-900">
+      <div className="py-2 px-2 md:px-4 grid grid-cols-[1fr_auto_1fr] w-full">
         <div className="w-max fira-code-font">{navigationControls()}</div>
         <div></div>
         <div className="ml-auto grid grid-flow-col gap-1">
