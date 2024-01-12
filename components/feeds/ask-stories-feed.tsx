@@ -8,37 +8,37 @@ import { Story } from "~/types";
 import { RefreshCcw } from "lucide-react";
 
 export const AskStoriesFeed: FC = () => {
-  const [bestStoryIds, setBestStoryIds] = useState<number[]>([]);
-  const [bestStories, setBestStories] = useState<Story[]>([]);
+  const [askStoryIds, setAskStoryIds] = useState<number[]>([]);
+  const [askStories, setAskStories] = useState<Story[]>([]);
   const fetchAmount = 20;
   const [skip, setSkip] = useState(0);
 
   useEffect(() => {
-    const fetchBestStoryIds = async () => {
+    const fetchAskStoryIds = async () => {
       const { data } = await axios.get(`${API_URL}/askstories.json`);
-      setBestStoryIds(data);
+      setAskStoryIds(data);
     };
 
-    fetchBestStoryIds();
+    fetchAskStoryIds();
   }, []);
 
   useEffect(() => {
     const fetchBestStories = async () => {
       for (let i = skip; i < skip + fetchAmount; i++) {
-        if (bestStoryIds[i]) {
-          const { data: story } = await axios.get(`${API_URL}/item/${bestStoryIds[i]}.json`);
+        if (askStoryIds[i]) {
+          const { data: story } = await axios.get(`${API_URL}/item/${askStoryIds[i]}.json`);
 
-          setBestStories(prevStories => [...prevStories, story]);
+          setAskStories(prevStories => [...prevStories, story]);
         }
       }
     };
 
     fetchBestStories();
-  }, [bestStoryIds, skip]);
+  }, [askStoryIds, skip]);
 
   return (
     <div className="grid grid-flow-row gap-2">
-      {bestStories.map(story => (
+      {askStories.map(story => (
         <StoryComponent story={story} key={story.id} />
       ))}
       <div className="grid place-items-center py-4">
