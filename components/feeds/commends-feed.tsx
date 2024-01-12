@@ -38,7 +38,7 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids, level }) => {
       return (
         <div
           className={cn(
-            "grid grid-cols-[max-content_auto] ml-2 py-4 gap-2",
+            "grid grid-cols-[max-content_auto] ml-1 sm:ml-2 py-4 gap-1 sm:gap-2",
             isCollapsed && "hidden"
           )}>
           <div className="bg-zinc-400 dark:bg-zinc-500 w-[1px] h-full"></div>
