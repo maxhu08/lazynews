@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { CommentComponent } from "~/components/comment-component";
 import { API_URL } from "~/constants/api-url";
@@ -19,9 +20,8 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids, level }) => {
   useEffect(() => {
     const fetchComments = async () => {
       const commentRequests = commentIds.map(async commentId => {
-        const response = await fetch(`${API_URL}/item/${commentId}.json`);
-        const commentData = await response.json();
-        return commentData;
+        const comments = await axios.get(`${API_URL}/item/${commentId}.json`);
+        return comments.data;
       });
 
       const commentDataArray = await Promise.all(commentRequests);
