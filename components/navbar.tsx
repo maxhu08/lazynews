@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, Github, Terminal } from "lucide-react";
+import { ChevronLeft, Ghost, Github } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, useEffect, useState } from "react";
@@ -29,7 +29,7 @@ export const Navbar: FC = () => {
     if (pathname === "/") {
       return (
         <div className="grid grid-cols-[max-content_max-content] gap-1 text-indigo-500 place-items-center select-none">
-          <Terminal className="w-4 h-4" />
+          <Ghost className="w-4 h-4" />
           <span>news</span>
         </div>
       );
@@ -59,7 +59,13 @@ export const Navbar: FC = () => {
           <ThemeToggle />
         </div>
       </div>
-      <Separator orientation="horizontal" className={cn("transition-all duration-500 mx-auto bg-zinc-400 dark:!bg-zinc-700", scrolled ? "w-full visible" : "w-0 invisible")} />
+      <Separator
+        orientation="horizontal"
+        className={cn(
+          "transition-all duration-500 mx-auto bg-zinc-400 dark:!bg-zinc-700",
+          scrolled ? "w-full visible" : "w-0 invisible"
+        )}
+      />
     </nav>
   );
 };
