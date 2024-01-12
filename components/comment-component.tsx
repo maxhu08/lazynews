@@ -14,12 +14,6 @@ export const CommentComponent: FC<CommentComponentProps> = ({ comment }) => {
           by {comment.by} • {formatTimeAgo(comment.time)}
         </span>
         <p className="break-words overflow-auto">{comment.text}</p>
-        {/* if no replies */}
-        {comment.kids && (
-          <span className="text-xs text-zinc-500 dark:text-zinc-400">
-            {comment.kids.length} {comment.kids.length !== 1 ? "replies" : "reply"}
-          </span>
-        )}
       </div>
     </div>
   );
