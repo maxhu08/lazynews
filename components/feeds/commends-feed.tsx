@@ -9,10 +9,9 @@ import { cn } from "~/utils/cn";
 
 interface CommentsFeedProps {
   storyKids: number[];
-  level?: number;
 }
 
-export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids, level }) => {
+export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids }) => {
   const [comments, setComments] = useState<Comment[]>();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const commentIds = storyKids;
