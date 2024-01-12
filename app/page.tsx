@@ -1,11 +1,20 @@
 "use client";
 
 import { useContext } from "react";
+import { AskStoriesFeed } from "~/components/feeds/ask-stories-feed";
 import { BestStoriesFeed } from "~/components/feeds/best-stories-feed";
 import { NewStoriesFeed } from "~/components/feeds/new-stories-feed";
-import { NewestFeed } from "~/components/feeds/newest-feed";
+import { NewestStoriesFeed } from "~/components/feeds/newest-stories-feed";
 import { NewsToggle } from "~/components/news-toggle";
 import { Context } from "~/context";
+
+// prettier-ignore
+const newsFeedMap = {
+  "best-stories": <BestStoriesFeed />,
+  "new-stories": <NewStoriesFeed />,
+  "newest-stories": <NewestStoriesFeed />,
+  "ask-stories": <AskStoriesFeed />
+};
 
 const Page = () => {
   const context = useContext(Context);
@@ -15,9 +24,7 @@ const Page = () => {
       <div className="mb-2">
         <NewsToggle />
       </div>
-      {context.value.newsMode === "best-stories" && <BestStoriesFeed />}
-      {context.value.newsMode === "new-stories" && <NewStoriesFeed />}
-      {context.value.newsMode === "newest" && <NewestFeed />}
+      {newsFeedMap[context.value.newsMode]}
     </div>
   );
 };

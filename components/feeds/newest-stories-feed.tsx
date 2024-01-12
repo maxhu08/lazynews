@@ -6,7 +6,7 @@ import { API_URL } from "~/constants/api-url";
 import { StoryComponent } from "~/components/story-component";
 import { Story } from "~/types";
 
-export const NewestFeed: FC = () => {
+export const NewestStoriesFeed: FC = () => {
   const [newStories, setNewStories] = useState<Story[]>([]);
 
   useEffect(() => {

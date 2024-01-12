@@ -1,4 +1,4 @@
-export type NewsMode = "best-stories" | "new-stories" | "newest";
+export type NewsMode = "best-stories" | "new-stories" | "newest-stories" | "ask-stories";
 
 export interface Story {
   by: string;
