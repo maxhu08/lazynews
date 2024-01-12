@@ -18,10 +18,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <ContextProvider initalValue={defaultContextValue}>
       <html lang="en" suppressHydrationWarning>
-        <body className={cn(inter.className, "min-h-screen bg-neutral-200 dark:bg-neutral-900 antialiased")} dir="ltr">
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <body
+          className={cn(
+            inter.className,
+            "min-h-screen bg-neutral-200 dark:bg-neutral-900 antialiased"
+          )}
+          dir="ltr">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange>
             <Navbar />
-            {children}
+
+            <div className="mx-auto w-full sm:w-[60%] md:w-[40%] pt-12 md:pt-16 pb-10">
+              {children}
+            </div>
           </ThemeProvider>
         </body>
       </html>
