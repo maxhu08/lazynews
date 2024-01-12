@@ -13,7 +13,6 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <div className="pt-20">
-      <p>item id: {params.slug}</p>
       <ExpandedStory story={story.data} />
     </div>
   );

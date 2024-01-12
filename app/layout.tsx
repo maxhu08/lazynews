@@ -31,9 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             disableTransitionOnChange>
             <Navbar />
 
-            <div className="mx-auto w-full sm:w-[60%] md:w-[40%] pt-12 md:pt-16 pb-10">
-              {children}
-            </div>
+            <div className="mx-auto w-full sm:w-[60%] md:w-[40%] pb-10">{children}</div>
           </ThemeProvider>
         </body>
       </html>
