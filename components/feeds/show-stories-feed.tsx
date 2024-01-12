@@ -7,38 +7,38 @@ import { StoryComponent } from "~/components/story-component";
 import { Story } from "~/types";
 import { RefreshCcw } from "lucide-react";
 
-export const AskStoriesFeed: FC = () => {
-  const [askStoryIds, setAskStoryIds] = useState<number[]>([]);
-  const [askStories, setAskStories] = useState<Story[]>([]);
+export const ShowStoriesFeed: FC = () => {
+  const [showStoryIds, setShowStoryIds] = useState<number[]>([]);
+  const [showStories, setShowStories] = useState<Story[]>([]);
   const fetchAmount = 20;
   const [skip, setSkip] = useState(0);
 
   useEffect(() => {
-    const fetchAskStoryIds = async () => {
-      const { data } = await axios.get(`${API_URL}/askstories.json`);
-      setAskStoryIds(data);
+    const fetchShowStoryIds = async () => {
+      const { data } = await axios.get(`${API_URL}/showstories.json`);
+      setShowStories(data);
     };
 
-    fetchAskStoryIds();
+    fetchShowStoryIds();
   }, []);
 
   useEffect(() => {
-    const fetchAskStories = async () => {
+    const fetchShowStories = async () => {
       for (let i = skip; i < skip + fetchAmount; i++) {
-        if (askStoryIds[i]) {
-          const { data: story } = await axios.get(`${API_URL}/item/${askStoryIds[i]}.json`);
+        if (showStoryIds[i]) {
+          const { data: story } = await axios.get(`${API_URL}/item/${showStoryIds[i]}.json`);
 
-          setAskStories(prevStories => [...prevStories, story]);
+          setShowStories(prevStories => [...prevStories, story]);
         }
       }
     };
 
-    fetchAskStories();
-  }, [askStoryIds, skip]);
+    fetchShowStories();
+  }, [showStoryIds, skip]);
 
   return (
     <div className="grid grid-flow-row gap-2">
-      {askStories.map(story => (
+      {showStories.map(story => (
         <StoryComponent story={story} key={story.id} />
       ))}
       <div className="grid place-items-center py-4">

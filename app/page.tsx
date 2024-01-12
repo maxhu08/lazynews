@@ -5,16 +5,9 @@ import { AskStoriesFeed } from "~/components/feeds/ask-stories-feed";
 import { BestStoriesFeed } from "~/components/feeds/best-stories-feed";
 import { NewStoriesFeed } from "~/components/feeds/new-stories-feed";
 import { NewestStoriesFeed } from "~/components/feeds/newest-stories-feed";
+import { StoriesFeed } from "~/components/feeds/stories-feed";
 import { NewsToggle } from "~/components/news-toggle";
 import { Context } from "~/context";
-
-// prettier-ignore
-const newsFeedMap = {
-  "best-stories": <BestStoriesFeed />,
-  "new-stories": <NewStoriesFeed />,
-  "newest-stories": <NewestStoriesFeed />,
-  "ask-stories": <AskStoriesFeed />
-};
 
 const Page = () => {
   const context = useContext(Context);
@@ -24,7 +17,7 @@ const Page = () => {
       <div className="mb-2">
         <NewsToggle />
       </div>
-      {newsFeedMap[context.value.newsMode]}
+      <StoriesFeed type={context.value.newsMode} />
     </div>
   );
 };
