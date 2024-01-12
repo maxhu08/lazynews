@@ -24,7 +24,7 @@ export const ExpandedStory: FC<ExpandedStoryProps> = ({ story }) => {
       <p className="font-semibold">
         {story.descendants} comment{story.descendants !== 1 && "s"}
       </p>
-      <CommentsFeed storyId={story.id} />
+      <CommentsFeed storyKids={story.kids} />
     </div>
   );
 };

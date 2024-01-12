@@ -1,9 +1,9 @@
 import { FC } from "react";
 
 interface CommentsFeedProps {
-  storyId: number;
+  storyKids: number[];
 }
 
-export const CommentsFeed: FC<CommentsFeedProps> = ({ storyId }) => {
-  return <div>comments</div>;
+export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids }) => {
+  return <div>{storyKids.length}</div>;
 };

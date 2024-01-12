@@ -10,7 +10,7 @@ export interface Story {
   by: string;
   descendants: number;
   id: number;
-  kids: string;
+  kids: number[];
   score: number;
   time: number;
   title: string;
