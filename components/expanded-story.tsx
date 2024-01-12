@@ -1,3 +1,4 @@
+import { ThumbsUp } from "lucide-react";
 import { FC } from "react";
 import { CommentsFeed } from "~/components/feeds/commends-feed";
 import { Separator } from "~/components/separator";
@@ -19,6 +20,10 @@ export const ExpandedStory: FC<ExpandedStoryProps> = ({ story }) => {
       </div>
       <div className="mt-2">
         <p>{story.text}</p>
+      </div>
+      <div className="w-max grid place-items-center grid-flow-col gap-1">
+        <span>{story.score}</span>
+        <ThumbsUp className="w-4 h-4" />
       </div>
       <Separator orientation="horizontal" className="bg-zinc-400 dark:bg-zinc-500 my-2" />
       <p className="font-semibold">
