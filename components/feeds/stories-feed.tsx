@@ -2,36 +2,40 @@
 
 import axios from "axios";
 import { RefreshCcw } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { StoryComponent } from "~/components/story-component";
 import { API_URL } from "~/constants/api-url";
+import { Context } from "~/context";
 import type { NewsMode, Story } from "~/types";
-
-interface StoriesFeedProps {
-  type: NewsMode;
-}
 
 const storyFetchMap: { [key in NewsMode]: string } = {
   "best-stories": "beststories.json",
   "new-stories": "topstories.json",
   "newest-stories": "newstories.json",
-  "ask-stories": "askstories.json"
+  "ask-stories": "askstories.json",
+  "show-stories": "showstories.json",
+  "job-stories": "jobstories.json"
 };
 
-export const StoriesFeed: FC<StoriesFeedProps> = ({ type }) => {
+export const StoriesFeed: FC = () => {
   const [storyIds, setStoryIds] = useState<number[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
   const fetchAmount = 20;
   const [skip, setSkip] = useState(0);
 
+  const context = useContext(Context);
+
   useEffect(() => {
     const fetchStoryIds = async () => {
-      const { data } = await axios.get(`${API_URL}/${storyFetchMap[type]}`);
+      const { data } = await axios.get(`${API_URL}/${storyFetchMap[context.value.newsMode]}`);
       setStoryIds(data);
+
+      // reset
+      setStories([]);
     };
 
     fetchStoryIds();
-  }, [type]);
+  }, [context.value.newsMode]);
 
   useEffect(() => {
     const fetchStories = async () => {

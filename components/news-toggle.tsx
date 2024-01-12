@@ -1,6 +1,15 @@
 "use client";
 
-import { BellRing, MessageCircleQuestion, Newspaper, Sliders, Sun, Trophy } from "lucide-react";
+import {
+  BellRing,
+  Briefcase,
+  MessageCircleQuestion,
+  Newspaper,
+  Sliders,
+  Sun,
+  Theater,
+  Trophy
+} from "lucide-react";
 import { FC, useContext } from "react";
 import {
   DropdownMenu,
@@ -11,11 +20,18 @@ import {
 import { Context } from "~/context";
 import { NewsMode } from "~/types";
 
-const map = {
-  "best-stories": { text: "Best Stories", icon: <Trophy className="w-4 h-4" /> },
-  "new-stories": { text: "New Stories", icon: <Newspaper className="w-4 h-4" /> },
+interface NewsOption {
+  text: string;
+  icon: React.ReactNode;
+}
+
+const map: { [keys in NewsMode]: NewsOption } = {
+  "best-stories": { text: "Best", icon: <Trophy className="w-4 h-4" /> },
+  "new-stories": { text: "New", icon: <Newspaper className="w-4 h-4" /> },
   "newest-stories": { text: "Newest", icon: <BellRing className="w-4 h-4" /> },
-  "ask-stories": { text: "Ask", icon: <MessageCircleQuestion className="w-4 h-4" /> }
+  "ask-stories": { text: "Ask", icon: <MessageCircleQuestion className="w-4 h-4" /> },
+  "show-stories": { text: "Show", icon: <Theater className="w-4 h-4" /> },
+  "job-stories": { text: "Jobs", icon: <Briefcase className="w-4 h-4" /> }
 };
 
 export const NewsToggle: FC = () => {
