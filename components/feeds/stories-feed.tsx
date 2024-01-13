@@ -20,10 +20,11 @@ const storyFetchMap: { [key in NewsMode]: string } = {
 export const StoriesFeed: FC = () => {
   const [storyIds, setStoryIds] = useState<number[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
-  const fetchAmount = 2;
+  const fetchAmount = 4;
   const [skip, setSkip] = useState(0);
   const [loading, setLoading] = useState(true);
   const [fetch, setFetch] = useState(true);
+  const [prevNewsMode, setPrevNewsMode] = useState<NewsMode>("best-stories");
 
   const context = useContext(Context);
 
@@ -33,12 +34,16 @@ export const StoriesFeed: FC = () => {
       setStoryIds(data);
 
       setLoading(false);
-      // reset
-      // setStories([]);
-    };
 
+      // reset if change news mode
+      if (context.value.newsMode !== prevNewsMode) {
+        setPrevNewsMode(context.value.newsMode);
+        setStories([]);
+        setFetch(true);
+      }
+    };
     fetchStoryIds();
-  }, [context.value.newsMode]);
+  }, [context.value.newsMode, prevNewsMode]);
 
   console.error = () => {};
 
