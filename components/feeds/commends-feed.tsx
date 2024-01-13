@@ -23,13 +23,11 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids }) => {
         return comments.data;
       });
 
-      const commentDataArray = await Promise.all(commentRequests);
-      setComments(commentDataArray);
+      const commentsData = await Promise.all(commentRequests);
+      setComments(commentsData);
     };
 
-    if (commentIds.length > 0) {
-      fetchComments();
-    }
+    fetchComments();
   }, [commentIds]);
 
   const renderNestedComments = (comment: Comment) => {

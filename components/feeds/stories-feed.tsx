@@ -20,7 +20,7 @@ const storyFetchMap: { [key in NewsMode]: string } = {
 export const StoriesFeed: FC = () => {
   const [storyIds, setStoryIds] = useState<number[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
-  const fetchAmount = 20;
+  const fetchAmount = 2;
   const [skip, setSkip] = useState(0);
 
   const context = useContext(Context);
@@ -39,13 +39,13 @@ export const StoriesFeed: FC = () => {
 
   useEffect(() => {
     const fetchStories = async () => {
-      for (let i = skip; i < skip + fetchAmount; i++) {
-        if (storyIds[i]) {
-          const { data: story } = await axios.get(`${API_URL}/item/${storyIds[i]}.json`);
+      const storyRequests = storyIds.slice(skip, skip + fetchAmount).map(async storyId => {
+        const stories = await axios.get(`${API_URL}/item/${storyId}.json`);
+        return stories.data;
+      });
 
-          setStories(prevStories => [...prevStories, story]);
-        }
-      }
+      const storiesData: Story[] = await Promise.all(storyRequests);
+      setStories(prev => [...prev, ...storiesData]);
     };
 
     fetchStories();
