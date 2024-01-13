@@ -45,14 +45,10 @@ export const StoriesFeed: FC = () => {
     fetchStoryIds();
   }, [context.value.newsMode, prevNewsMode]);
 
-  console.error = () => {};
-
   useEffect(() => {
     const fetchStories = async () => {
       setFetch(false);
       setLoading(true);
-
-      console.log("asdf", storyIds);
 
       const storyRequests = storyIds.slice(skip, skip + fetchAmount).map(async storyId => {
         const stories = await axios.get(`${API_URL}/item/${storyId}.json`);
