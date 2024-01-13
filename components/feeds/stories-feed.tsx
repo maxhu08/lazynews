@@ -22,6 +22,8 @@ export const StoriesFeed: FC = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const fetchAmount = 2;
   const [skip, setSkip] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [fetch, setFetch] = useState(true);
 
   const context = useContext(Context);
 
@@ -30,15 +32,23 @@ export const StoriesFeed: FC = () => {
       const { data } = await axios.get(`${API_URL}/${storyFetchMap[context.value.newsMode]}`);
       setStoryIds(data);
 
+      setLoading(false);
       // reset
-      setStories([]);
+      // setStories([]);
     };
 
     fetchStoryIds();
   }, [context.value.newsMode]);
 
+  console.error = () => {};
+
   useEffect(() => {
     const fetchStories = async () => {
+      setFetch(false);
+      setLoading(true);
+
+      console.log("asdf", storyIds);
+
       const storyRequests = storyIds.slice(skip, skip + fetchAmount).map(async storyId => {
         const stories = await axios.get(`${API_URL}/item/${storyId}.json`);
         return stories.data;
@@ -46,10 +56,16 @@ export const StoriesFeed: FC = () => {
 
       const storiesData: Story[] = await Promise.all(storyRequests);
       setStories(prev => [...prev, ...storiesData]);
+      setLoading(false);
     };
 
-    fetchStories();
-  }, [storyIds, skip]);
+    if (fetch && !loading && storyIds.length !== 0) fetchStories();
+  }, [storyIds, skip, loading, fetch]);
+
+  const handleFetchMore = () => {
+    setSkip(prev => prev + fetchAmount);
+    setFetch(true);
+  };
 
   return (
     <div className="grid grid-flow-row gap-2">
@@ -57,14 +73,18 @@ export const StoriesFeed: FC = () => {
         <StoryComponent story={story} key={story.id} />
       ))}
       <div className="grid place-items-center py-4">
-        <button
-          onClick={() => setSkip(prevSkip => prevSkip + fetchAmount)}
-          className="bg-indigo-500 hover:bg-indigo-700 duration-300 ease-in-out p-1 rounded-md">
-          <div className="grid grid-cols-[max-content_max-content] gap-1 place-items-center text-white">
-            <RefreshCcw className="w-4 h-4" />
-            <span>Load more</span>
-          </div>
-        </button>
+        {loading ? (
+          <p>loading...</p>
+        ) : (
+          <button
+            onClick={handleFetchMore}
+            className="bg-indigo-500 hover:bg-indigo-700 duration-300 ease-in-out p-1 rounded-md">
+            <div className="grid grid-cols-[max-content_max-content] gap-1 place-items-center text-white">
+              <RefreshCcw className="w-4 h-4" />
+              <span>Load more</span>
+            </div>
+          </button>
+        )}
       </div>
     </div>
   );
