@@ -50,6 +50,10 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
     return null;
   };
 
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
     <div className="grid grid-flow-row gap-4">
       {comments &&
