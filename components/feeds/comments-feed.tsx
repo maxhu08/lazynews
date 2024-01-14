@@ -21,9 +21,10 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   const [fetch, setFetch] = useState(true);
 
   useEffect(() => {
+    if (level > 2) return;
     const fetchComments = async () => {
       setLoading(true);
-      const commentIdsToFetch = commentIds.slice(skip, skip + fetchAmount);
+      const commentIdsToFetch = commentIds.slice(skip, skip + 1);
       const commentRequests = commentIdsToFetch.map(async (commentId) => {
         const comments = await axios.get(`${API_URL}/item/${commentId}.json`);
         return comments.data;
@@ -32,10 +33,11 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
       const commentsData: Comment[] = await Promise.all(commentRequests);
       setComments((prev) => [...prev, ...commentsData]);
       setLoading(false);
+      setFetch(false);
     };
 
     if (fetch && !loading) fetchComments();
-  }, [commentIds, skip, fetch, loading]);
+  }, [commentIds, skip, fetch, loading, level]);
 
   const handleFetchMore = () => {
     setSkip((prev) => prev + fetchAmount);
