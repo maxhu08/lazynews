@@ -29,7 +29,9 @@ export const StoryComponent: FC<StoryComponentProps> = ({ story }) => {
               <a href={story.url} target="_blank" className="cursor-pointer">
                 <div className="grid grid-cols-[max-content_max-content] place-items-center gap-1 text-blue-500 hover:bg-blue-500/20 duration-300 ease-in-out p-1 w-max rounded-md">
                   <ExternalLink className="w-4 h-4" />
-                  <p className="max-w-[100px] sm:max-w-[160px] md:max-w-none truncate">{shortenUrl(story.url)}</p>
+                  <p className="max-w-[100px] sm:max-w-[160px] md:max-w-none truncate">
+                    {shortenUrl(story.url)}
+                  </p>
                 </div>
               </a>
             )}

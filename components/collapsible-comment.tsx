@@ -40,7 +40,8 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
               </span>
               <button
                 onClick={toggleCollapse}
-                className="text-blue-500 hover:text-blue-700 duration-300 ease-in-out text-xs">
+                className="text-blue-500 hover:text-blue-700 duration-300 ease-in-out text-xs"
+              >
                 {collapsed ? (
                   <div>
                     <span>expand</span>
@@ -57,14 +58,16 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
             className={cn(
               "grid grid-cols-[max-content_auto] ml-1 sm:ml-2 py-4 gap-1 sm:gap-2",
               collapsed && "hidden"
-            )}>
+            )}
+          >
             <div className="grid grid-rows-1 gap-1 place-items-center">
               {/* <span className={cn("text-sm")}>{level}</span> */}
               <div
                 className={cn(
                   "bg-zinc-400 dark:bg-zinc-500 w-[1px] h-full",
                   lineColorOptions[(level - 1) % 6]
-                )}></div>
+                )}
+              ></div>
             </div>
             <CommentsFeed level={level + 1} storyKids={comment.kids} />
           </div>

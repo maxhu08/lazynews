@@ -23,12 +23,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             inter.className,
             "min-h-screen bg-neutral-200 dark:bg-neutral-900 antialiased"
           )}
-          dir="ltr">
+          dir="ltr"
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
-            disableTransitionOnChange>
+            disableTransitionOnChange
+          >
             <Navbar />
 
             <div className="mx-auto w-full sm:w-[60%] md:w-[40%] pb-10">{children}</div>
