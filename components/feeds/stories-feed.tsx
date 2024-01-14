@@ -57,7 +57,11 @@ export const StoriesFeed: FC = () => {
       });
 
       const storiesData: Story[] = await Promise.all(storyRequests);
-      setStories((prev) => [...prev, ...storiesData]);
+      // works but should fix later
+      setStories((prev) => [
+        ...prev,
+        ...storiesData.filter((story) => !prev.some((prevStory) => prevStory.id === story.id))
+      ]);
       setLoading(false);
     };
 
