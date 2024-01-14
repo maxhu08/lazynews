@@ -63,7 +63,7 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   };
 
   return (
-    <div className="grid grid-flow-row gap-4">
+    <div className="grid grid-flow-row gap-6">
       {comments &&
         comments.map((comment, index) => (
           <CollapsibleComment comment={comment} level={level} num={index + 1} key={comment.id} />

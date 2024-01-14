@@ -7,7 +7,7 @@ export type NewsMode =
   | "show-stories"
   | "job-stories";
 
-export interface Story {
+export type Story = {
   by: string;
   descendants: number;
   id: number;
@@ -18,9 +18,11 @@ export interface Story {
   type: "story";
   url: string;
   text?: string;
-}
+};
 
-export interface Comment {
+export type Comment = ExistingComment | DeletedComment;
+
+export type ExistingComment = {
   by: string;
   id: number;
   kids: number[];
@@ -28,4 +30,12 @@ export interface Comment {
   text: string;
   time: number;
   type: "comment";
-}
+};
+
+export type DeletedComment = {
+  deleted: true;
+  id: number;
+  parent: number;
+  time: number;
+  type: "comment";
+};

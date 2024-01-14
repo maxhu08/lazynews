@@ -29,6 +29,11 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
     setCollapsed((prev) => !prev);
   };
 
+  // if comment doesn't exist
+  if ("deleted" in comment) {
+    return null;
+  }
+
   return (
     <div>
       {/* circle */}
