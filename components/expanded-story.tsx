@@ -1,6 +1,6 @@
 import { ThumbsUp } from "lucide-react";
 import { FC } from "react";
-import { CommentsFeed } from "~/components/feeds/commends-feed";
+import { CommentsFeed } from "~/components/feeds/comments-feed";
 import { Separator } from "~/components/separator";
 import { Story } from "~/types";
 import { formatTimeAgo } from "~/utils/format-time";
@@ -29,7 +29,7 @@ export const ExpandedStory: FC<ExpandedStoryProps> = ({ story }) => {
       <p className="font-semibold">
         {story.descendants} comment{story.descendants !== 1 && "s"}
       </p>
-      <CommentsFeed storyKids={story.kids} />
+      <CommentsFeed storyKids={story.kids} level={0} />
     </div>
   );
 };

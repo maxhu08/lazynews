@@ -1,17 +1,18 @@
 "use client";
 
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, use, useEffect, useState } from "react";
 import { CommentComponent } from "~/components/comment-component";
 import { API_URL } from "~/constants/api-url";
 import { Comment } from "~/types";
 import { cn } from "~/utils/cn";
 
 interface CommentsFeedProps {
+  level: number;
   storyKids: number[];
 }
 
-export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids }) => {
+export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   const [comments, setComments] = useState<Comment[]>();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const commentIds = storyKids;
@@ -38,16 +39,15 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ storyKids }) => {
             "grid grid-cols-[max-content_auto] ml-1 sm:ml-2 py-4 gap-1 sm:gap-2",
             isCollapsed && "hidden"
           )}>
-          <div className="bg-zinc-400 dark:bg-zinc-500 w-[1px] h-full"></div>
-          <CommentsFeed storyKids={comment.kids} />
+          <div className="grid grid-rows-[max-content_auto] gap-1 place-items-center">
+            <span className="text-sm">{level}</span>
+            <div className="bg-zinc-400 dark:bg-zinc-500 w-[1px] h-full"></div>
+          </div>
+          <CommentsFeed level={level + 1} storyKids={comment.kids} />
         </div>
       );
     }
     return null;
-  };
-
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
   };
 
   return (

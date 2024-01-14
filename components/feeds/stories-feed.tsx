@@ -20,7 +20,7 @@ const storyFetchMap: { [key in NewsMode]: string } = {
 export const StoriesFeed: FC = () => {
   const [storyIds, setStoryIds] = useState<number[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
-  const fetchAmount = 20;
+  const fetchAmount = 10;
   const [skip, setSkip] = useState(0);
   const [loading, setLoading] = useState(true);
   const [fetch, setFetch] = useState(true);
