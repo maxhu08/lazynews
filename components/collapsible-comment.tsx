@@ -11,6 +11,15 @@ interface CollapsibleCommentProps {
   level: number;
 }
 
+const lineColorOptions = [
+  "!bg-red-500",
+  "!bg-orange-500",
+  "!bg-yellow-500",
+  "!bg-emerald-500",
+  "!bg-blue-500",
+  "!bg-indigo-500"
+];
+
 export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level }) => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -49,9 +58,13 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
               "grid grid-cols-[max-content_auto] ml-1 sm:ml-2 py-4 gap-1 sm:gap-2",
               collapsed && "hidden"
             )}>
-            <div className="grid grid-rows-[max-content_auto] gap-1 place-items-center">
-              <span className="text-sm">{level}</span>
-              <div className="bg-zinc-400 dark:bg-zinc-500 w-[1px] h-full"></div>
+            <div className="grid grid-rows-1 gap-1 place-items-center">
+              {/* <span className={cn("text-sm")}>{level}</span> */}
+              <div
+                className={cn(
+                  "bg-zinc-400 dark:bg-zinc-500 w-[1px] h-full",
+                  lineColorOptions[(level - 1) % 6]
+                )}></div>
             </div>
             <CommentsFeed level={level + 1} storyKids={comment.kids} />
           </div>
