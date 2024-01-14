@@ -11,7 +11,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "lazynews",
-  description: "Modern client for browsing Y Combinator's hackernews"
+  description: "Modern client for browsing Y Combinator's hackernews",
+  openGraph: {
+    title: "lazynews",
+    description: "Modern client for browsing Y Combinator's hackernews",
+    images: ["/logo.svg"]
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
