@@ -29,6 +29,15 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
 
   return (
     <div>
+      {/* circle */}
+      <div className="relative">
+        <div
+          className={cn(
+            "absolute w-4 h-4 rounded-[50%] ml-[-1.25rem]",
+            lineColorOptions[(level - 2) % 6]
+          )}
+        ></div>
+      </div>
       <CommentComponent comment={comment} />
       {comment.kids && (
         <div>
@@ -56,7 +65,7 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
           </div>
           <div
             className={cn(
-              "grid grid-cols-[max-content_auto] ml-1 sm:ml-2 py-4 gap-1 sm:gap-2",
+              "grid grid-cols-[max-content_auto] ml-1 sm:ml-2 py-4 gap-3",
               collapsed && "hidden"
             )}
           >
