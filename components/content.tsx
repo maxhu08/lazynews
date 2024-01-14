@@ -6,5 +6,5 @@ interface ContentProps {
 }
 
 export const Content: FC<ContentProps> = ({ text }) => {
-  return <div>{ReactHtmlParser(text)}</div>;
+  return <div className="grid grid-flow-row gap-6">{ReactHtmlParser(text)}</div>;
 };
