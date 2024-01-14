@@ -9,6 +9,7 @@ import { cn } from "~/utils/cn";
 interface CollapsibleCommentProps {
   comment: Comment;
   level: number;
+  num: number;
 }
 
 const lineColorOptions = [
@@ -17,10 +18,11 @@ const lineColorOptions = [
   "!bg-yellow-500",
   "!bg-emerald-500",
   "!bg-blue-500",
-  "!bg-indigo-500"
+  "!bg-indigo-500",
+  "!bg-pink-500"
 ];
 
-export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level }) => {
+export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level, num }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapse = () => {
@@ -33,10 +35,12 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
       <div className="relative">
         <div
           className={cn(
-            "absolute w-4 h-4 rounded-[50%] ml-[-1.25rem]",
-            lineColorOptions[(level - 2) % 6]
+            "absolute w-4 h-4 rounded-[50%] ml-[-1.25rem] grid place-items-center",
+            lineColorOptions[(level - 2) % lineColorOptions.length]
           )}
-        ></div>
+        >
+          {level !== 1 && <span className="text-xs text-white font-semibold">{num}</span>}
+        </div>
       </div>
       <CommentComponent comment={comment} />
       {comment.kids && (
@@ -74,7 +78,7 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
               <div
                 className={cn(
                   "bg-zinc-400 dark:bg-zinc-500 w-[1px] h-full",
-                  lineColorOptions[(level - 1) % 6]
+                  lineColorOptions[(level - 1) % lineColorOptions.length]
                 )}
               ></div>
             </div>
