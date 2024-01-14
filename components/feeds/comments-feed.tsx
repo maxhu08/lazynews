@@ -14,7 +14,7 @@ interface CommentsFeedProps {
 
 export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   const [comments, setComments] = useState<Comment[]>([]);
-  console.log("t", storyKids);
+  // in case kids is undefined
   const commentIds = useMemo(() => (!!storyKids ? storyKids : []), [storyKids]);
   const [skip, setSkip] = useState(0);
 
