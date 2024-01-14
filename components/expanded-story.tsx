@@ -1,5 +1,6 @@
 import { MessagesSquare, ThumbsUp } from "lucide-react";
 import { FC } from "react";
+import { Content } from "~/components/content";
 import { CommentsFeed } from "~/components/feeds/comments-feed";
 import { Separator } from "~/components/separator";
 import { Story } from "~/types";
@@ -18,9 +19,7 @@ export const ExpandedStory: FC<ExpandedStoryProps> = ({ story }) => {
         </span>
         <p className="font-semibold break-words">{story.title}</p>
       </div>
-      <div className="mt-2">
-        <p>{story.text}</p>
-      </div>
+      <Content text={story.text ? story.text : ""} />
       <div className="w-max grid place-items-center grid-flow-col gap-1">
         <span>{story.score}</span>
         <ThumbsUp className="w-4 h-4" />
@@ -32,7 +31,6 @@ export const ExpandedStory: FC<ExpandedStoryProps> = ({ story }) => {
           {story.descendants} comment{story.descendants !== 1 && "s"}
         </span>
       </div>
-
       <CommentsFeed storyKids={story.kids} level={1} />
     </div>
   );

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Content } from "~/components/content";
 import { Comment } from "~/types";
 import { formatTimeAgo } from "~/utils/format-time";
 
@@ -13,7 +14,9 @@ export const CommentComponent: FC<CommentComponentProps> = ({ comment }) => {
         <span className="text-xs text-zinc-500 dark:text-zinc-400">
           by {comment.by} • {formatTimeAgo(comment.time)}
         </span>
-        <p className="break-words overflow-auto">{comment.text}</p>
+        <div className="break-words overflow-auto">
+          <Content text={comment.text} />
+        </div>
       </div>
     </div>
   );
