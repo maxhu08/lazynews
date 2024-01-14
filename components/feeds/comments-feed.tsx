@@ -2,19 +2,20 @@
 
 import axios from "axios";
 import { RefreshCcw } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { CollapsibleComment } from "~/components/collapsible-comment";
 import { API_URL } from "~/constants/api-url";
 import { Comment } from "~/types";
 
 interface CommentsFeedProps {
   level: number;
-  storyKids: number[];
+  storyKids: number[] | undefined;
 }
 
 export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   const [comments, setComments] = useState<Comment[]>([]);
-  const commentIds = storyKids;
+  console.log("t", storyKids);
+  const commentIds = useMemo(() => (!!storyKids ? storyKids : []), [storyKids]);
   const [skip, setSkip] = useState(0);
 
   // TODO fix
@@ -67,7 +68,7 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
         comments.map((comment) => (
           <CollapsibleComment comment={comment} level={level} key={comment.id} />
         ))}
-      {comments.length < storyKids.length && (
+      {!!storyKids && comments.length < storyKids.length && (
         <div className="grid place-items-center py-4">
           {loading ? (
             <p>loading...</p>
