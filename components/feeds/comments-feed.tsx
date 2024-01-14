@@ -16,28 +16,42 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const commentIds = storyKids;
   const [skip, setSkip] = useState(0);
-  const fetchAmount = 4;
+  let fetchAmount = 0;
+  switch (level) {
+    case 1:
+      fetchAmount = 5;
+    case 2:
+      fetchAmount = 3;
+    case 3:
+      fetchAmount = 2;
+  }
+
   const [loading, setLoading] = useState(false);
   const [fetch, setFetch] = useState(true);
 
   useEffect(() => {
-    if (level > 2) return;
     const fetchComments = async () => {
       setLoading(true);
-      const commentIdsToFetch = commentIds.slice(skip, skip + 1);
+      const commentIdsToFetch = commentIds.slice(skip, skip + fetchAmount);
       const commentRequests = commentIdsToFetch.map(async (commentId) => {
         const comments = await axios.get(`${API_URL}/item/${commentId}.json`);
         return comments.data;
       });
 
       const commentsData: Comment[] = await Promise.all(commentRequests);
-      setComments((prev) => [...prev, ...commentsData]);
+
+      setComments((prev) => [
+        ...prev,
+        ...commentsData.filter(
+          (comment) => !prev.some((prevComment) => prevComment.id === comment.id)
+        )
+      ]);
       setLoading(false);
       setFetch(false);
     };
 
     if (fetch && !loading) fetchComments();
-  }, [commentIds, skip, fetch, loading, level]);
+  }, [fetchAmount, commentIds, skip, fetch, loading, level]);
 
   const handleFetchMore = () => {
     setSkip((prev) => prev + fetchAmount);
