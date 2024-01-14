@@ -21,11 +21,11 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   let fetchAmount = 3;
   switch (level) {
     case 1:
-      fetchAmount = 5;
+      fetchAmount = 10;
     case 2:
-      fetchAmount = 3;
+      fetchAmount = 5;
     case 3:
-      fetchAmount = 2;
+      fetchAmount = 4;
   }
 
   const [loading, setLoading] = useState(false);
@@ -57,10 +57,6 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   }, [fetchAmount, commentIds, skip, fetch, loading, level]);
 
   const handleFetchMore = () => {
-    if (level > 3) {
-      fetchAmount = 3;
-    }
-    console.log(level, fetchAmount);
     setSkip((prev) => prev + fetchAmount);
     setFetch(true);
   };
