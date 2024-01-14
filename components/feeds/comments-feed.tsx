@@ -16,7 +16,9 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const commentIds = storyKids;
   const [skip, setSkip] = useState(0);
-  let fetchAmount = 0;
+
+  // TODO fix
+  let fetchAmount = 3;
   switch (level) {
     case 1:
       fetchAmount = 5;
@@ -40,6 +42,7 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
 
       const commentsData: Comment[] = await Promise.all(commentRequests);
 
+      // works but fix later
       setComments((prev) => [
         ...prev,
         ...commentsData.filter(
@@ -54,6 +57,10 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
   }, [fetchAmount, commentIds, skip, fetch, loading, level]);
 
   const handleFetchMore = () => {
+    if (level > 3) {
+      fetchAmount = 3;
+    }
+    console.log(level, fetchAmount);
     setSkip((prev) => prev + fetchAmount);
     setFetch(true);
   };
