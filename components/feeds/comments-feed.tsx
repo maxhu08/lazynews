@@ -71,21 +71,23 @@ export const CommentsFeed: FC<CommentsFeedProps> = ({ level, storyKids }) => {
         comments.map((comment) => (
           <CollapsibleComment comment={comment} level={level} key={comment.id} />
         ))}
-      <div className="grid place-items-center py-4">
-        {loading ? (
-          <p>loading...</p>
-        ) : (
-          <button
-            onClick={handleFetchMore}
-            className="bg-indigo-500 hover:bg-indigo-700 duration-300 ease-in-out p-1 rounded-md"
-          >
-            <div className="grid grid-cols-[max-content_max-content] gap-1 place-items-center text-white">
-              <RefreshCcw className="w-4 h-4" />
-              <span>Load more</span>
-            </div>
-          </button>
-        )}
-      </div>
+      {comments.length < storyKids.length && (
+        <div className="grid place-items-center py-4">
+          {loading ? (
+            <p>loading...</p>
+          ) : (
+            <button
+              onClick={handleFetchMore}
+              className="bg-indigo-500 hover:bg-indigo-700 duration-300 ease-in-out p-1 rounded-md"
+            >
+              <div className="grid grid-cols-[max-content_max-content] gap-1 place-items-center text-white">
+                <RefreshCcw className="w-4 h-4" />
+                <span>Load more</span>
+              </div>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };
