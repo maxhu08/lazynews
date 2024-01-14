@@ -13,7 +13,7 @@ type ContextType = {
 };
 
 export const defaultContextValue: ContextData = {
-  newsMode: "best-stories"
+  newsMode: "new-stories"
 };
 
 export const Context = createContext<ContextType>({

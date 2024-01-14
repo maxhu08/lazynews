@@ -1,4 +1,4 @@
-import { ThumbsUp } from "lucide-react";
+import { MessagesSquare, ThumbsUp } from "lucide-react";
 import { FC } from "react";
 import { CommentsFeed } from "~/components/feeds/comments-feed";
 import { Separator } from "~/components/separator";
@@ -26,9 +26,13 @@ export const ExpandedStory: FC<ExpandedStoryProps> = ({ story }) => {
         <ThumbsUp className="w-4 h-4" />
       </div>
       <Separator orientation="horizontal" className="bg-zinc-400 dark:bg-zinc-500 my-2" />
-      <p className="font-semibold">
-        {story.descendants} comment{story.descendants !== 1 && "s"}
-      </p>
+      <div className="w-max grid place-items-center grid-flow-col gap-1">
+        <MessagesSquare className="w-4 h-4" />
+        <span className="font-semibold">
+          {story.descendants} comment{story.descendants !== 1 && "s"}
+        </span>
+      </div>
+
       <CommentsFeed storyKids={story.kids} level={1} />
     </div>
   );
