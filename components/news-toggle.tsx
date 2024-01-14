@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BarChart2,
   BellRing,
   Briefcase,
   MessageCircleQuestion,
@@ -26,6 +27,7 @@ interface NewsOption {
 }
 
 const map: { [keys in NewsMode]: NewsOption } = {
+  "top-stories": { text: "Top", icon: <BarChart2 className="w-4 h-4BarChart2" /> },
   "best-stories": { text: "Best", icon: <Trophy className="w-4 h-4" /> },
   "new-stories": { text: "New", icon: <Newspaper className="w-4 h-4" /> },
   "newest-stories": { text: "Newest", icon: <BellRing className="w-4 h-4" /> },

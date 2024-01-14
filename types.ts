@@ -1,4 +1,5 @@
 export type NewsMode =
+  | "top-stories"
   | "best-stories"
   | "new-stories"
   | "newest-stories"

@@ -9,6 +9,7 @@ import { Context } from "~/context";
 import type { NewsMode, Story } from "~/types";
 
 const storyFetchMap: { [key in NewsMode]: string } = {
+  "top-stories": "topstories.json",
   "best-stories": "beststories.json",
   "new-stories": "topstories.json",
   "newest-stories": "newstories.json",
