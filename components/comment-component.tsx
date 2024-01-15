@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Content } from "~/components/content";
-import { Comment } from "~/types";
+import { ExistingComment } from "~/types";
 import { formatTimeAgo } from "~/utils/format-time";
 
 interface CommentComponentProps {
-  comment: Comment;
+  comment: ExistingComment;
 }
 
 export const CommentComponent: FC<CommentComponentProps> = ({ comment }) => {

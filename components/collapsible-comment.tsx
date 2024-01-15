@@ -58,7 +58,7 @@ export const CollapsibleComment: FC<CollapsibleCommentProps> = ({ comment, level
               </span>
               <button
                 onClick={toggleCollapse}
-                className="text-blue-500 hover:text-blue-700 duration-300 ease-in-out text-xs"
+                className="text-blue-500 hover:text-blue-600 duration-300 ease-in-out text-xs"
               >
                 {collapsed ? (
                   <div>

@@ -36,7 +36,7 @@ export const Navbar: FC = () => {
     } else {
       return (
         <Link href="/">
-          <div className="grid grid-cols-[max-content_max-content] gap-1 text-blue-500 hover:text-blue-700 duration-300 ease-in-out place-items-center cursor-pointer">
+          <div className="grid grid-cols-[max-content_max-content] gap-1 text-blue-500 hover:text-blue-600 duration-300 ease-in-out place-items-center cursor-pointer">
             <ChevronLeft className="w-4 h-4" />
             <span>Home</span>
           </div>
