@@ -10,6 +10,7 @@ import { defaultContextValue } from "~/context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://yclazynews.vercel.app"),
   title: "lazynews",
   description: "Modern client for browsing Y Combinator's hackernews",
   openGraph: {
