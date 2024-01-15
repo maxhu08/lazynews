@@ -1,4 +1,5 @@
 import { ExternalLink, MessagesSquare, ThumbsUp } from "lucide-react";
+import Link from "next/link";
 import { FC } from "react";
 import { Content } from "~/components/content";
 import { CommentsFeed } from "~/components/feeds/comments-feed";
@@ -16,7 +17,14 @@ export const ExpandedStory: FC<ExpandedStoryProps> = ({ story }) => {
     <div className="bg-neutral-300 dark:bg-neutral-800 sm:rounded-md p-2">
       <div className="grid grid-flow-row">
         <span className="text-xs text-zinc-500 dark:text-zinc-400">
-          by {story.by} • {formatTimeAgo(story.time)}
+          by{" "}
+          <Link
+            href={`/users/${story.by}`}
+            className="hover:text-black dark:hover:text-white transition"
+          >
+            {story.by}
+          </Link>{" "}
+          • {formatTimeAgo(story.time)}
         </span>
         <p className="font-semibold break-words">{story.title}</p>
         {shortenUrl(story.url) && (

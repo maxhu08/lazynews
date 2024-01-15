@@ -20,7 +20,14 @@ export const StoryComponent: FC<StoryComponentProps> = ({ story }) => {
         <div className="grid grid-flow-row">
           <div className="grid grid-flow-row">
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
-              by {story.by} • {formatTimeAgo(story.time)}
+              by{" "}
+              <Link
+                href={`/users/${story.by}`}
+                className="hover:text-black dark:hover:text-white transition"
+              >
+                {story.by}
+              </Link>{" "}
+              • {formatTimeAgo(story.time)}
             </span>
             <p className="font-semibold break-words">{story.title}</p>
           </div>
