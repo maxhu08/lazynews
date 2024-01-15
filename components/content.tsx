@@ -40,5 +40,5 @@ export const Content: FC<ContentProps> = ({ text }) => {
     return undefined;
   };
 
-  return <div className="">{ReactHtmlParser(text, { transform })}</div>;
+  return <div className="leading-6">{ReactHtmlParser(text, { transform })}</div>;
 };
