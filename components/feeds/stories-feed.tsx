@@ -21,11 +21,12 @@ const storyFetchMap: { [key in NewsMode]: string } = {
 export const StoriesFeed: FC = () => {
   const [storyIds, setStoryIds] = useState<number[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
-  const fetchAmount = 10;
+  const fetchAmount = 20;
   const [skip, setSkip] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [fetch, setFetch] = useState(true);
   const [prevNewsMode, setPrevNewsMode] = useState<NewsMode>("best-stories");
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const context = useContext(Context);
 
@@ -33,8 +34,6 @@ export const StoriesFeed: FC = () => {
     const fetchStoryIds = async () => {
       const { data } = await axios.get(`${API_URL}/${storyFetchMap[context.value.newsMode]}`);
       setStoryIds(data);
-
-      setLoading(false);
 
       // reset if change news mode
       if (context.value.newsMode !== prevNewsMode) {
@@ -62,6 +61,7 @@ export const StoriesFeed: FC = () => {
         ...prev,
         ...storiesData.filter((story) => !prev.some((prevStory) => prevStory.id === story.id))
       ]);
+      setInitialLoading(false);
       setLoading(false);
     };
 
@@ -79,7 +79,7 @@ export const StoriesFeed: FC = () => {
         <StoryComponent story={story} key={story.id} />
       ))}
       <div className="grid place-items-center py-4">
-        {loading ? (
+        {loading || initialLoading ? (
           <p>loading...</p>
         ) : (
           <button
