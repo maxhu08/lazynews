@@ -39,3 +39,10 @@ export type DeletedComment = {
   time: number;
   type: "comment";
 };
+
+export type User = {
+  created: number;
+  id: string;
+  karma: number;
+  submitted: number[];
+};
