@@ -8,6 +8,7 @@ export type NewsMode =
   | "job-stories";
 
 export type Story = {
+  deleted?: boolean;
   by: string;
   descendants: number;
   id: number;
@@ -23,6 +24,7 @@ export type Story = {
 export type Comment = ExistingComment | DeletedComment;
 
 export type ExistingComment = {
+  deleted?: false;
   by: string;
   id: number;
   kids: number[];
@@ -46,3 +48,5 @@ export type User = {
   karma: number;
   submitted: number[];
 };
+
+export type Submission = Story | ExistingComment | DeletedComment;

@@ -2,46 +2,44 @@
 
 import axios from "axios";
 import { RefreshCcw } from "lucide-react";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { CommentComponent } from "~/components/comment-component";
 import { StoryComponent } from "~/components/story-component";
 import { API_URL } from "~/constants/api-url";
-import { Context } from "~/context";
-import type { Story } from "~/types";
+import type { Submission } from "~/types";
 
 interface SubmissionsFeedProps {
   submissionIds: number[];
 }
 
 export const SubmissionsFeed: FC<SubmissionsFeedProps> = ({ submissionIds }) => {
-  const [stories, setStories] = useState<Story[]>([]);
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
   const fetchAmount = 20;
   const [skip, setSkip] = useState(0);
   const [loading, setLoading] = useState(false);
   const [fetch, setFetch] = useState(true);
   const [initialLoading, setInitialLoading] = useState(true);
 
-  const context = useContext(Context);
-
   useEffect(() => {
     const fetchStories = async () => {
       setFetch(false);
       setLoading(true);
 
-      const storyRequests = submissionIds
+      const submissionRequestions = submissionIds
         .slice(skip, skip + fetchAmount)
         .map(async (submissionId) => {
           const stories = await axios.get(`${API_URL}/item/${submissionId}.json`);
           return stories.data;
         });
 
-      const storiesData: Story[] = await Promise.all(storyRequests);
+      const submissionsData: Submission[] = await Promise.all(submissionRequestions);
       // works but should fix later
-      setStories((prev) => [
+      setSubmissions((prev) => [
         ...prev,
-        ...storiesData.filter((story) => !prev.some((prevStory) => prevStory.id === story.id))
+        ...submissionsData.filter((submission) => {
+          return true;
+        })
       ]);
-
-      console.log(stories);
 
       setInitialLoading(false);
       setLoading(false);
@@ -57,9 +55,20 @@ export const SubmissionsFeed: FC<SubmissionsFeedProps> = ({ submissionIds }) => 
 
   return (
     <div className="grid grid-flow-row gap-2">
-      {stories.map((story) => (
-        <StoryComponent story={story} key={story.id} />
-      ))}
+      {submissions.map((submission) => {
+        if (submission.type === "comment" && !submission.deleted) {
+          return (
+            <div className="bg-neutral-800 p-2 rounded-md">
+              <CommentComponent comment={submission} />
+            </div>
+          );
+        }
+        if (submission.type === "story") {
+          return <StoryComponent story={submission} />;
+        }
+
+        return null;
+      })}
       <div className="grid place-items-center py-4">
         {loading || initialLoading ? (
           <p>loading...</p>

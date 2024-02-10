@@ -15,8 +15,10 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <div className="pt-20">
-      <UserInfo user={user.data} />
-      <SubmissionsFeed submissionIds={user.data.submitted} />
+      <div className="grid grid-flow-row gap-2">
+        <UserInfo user={user.data} />
+        <SubmissionsFeed submissionIds={user.data.submitted} />
+      </div>
     </div>
   );
 };
