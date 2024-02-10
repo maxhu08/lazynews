@@ -3,8 +3,8 @@
 import axios from "axios";
 import { RefreshCcw } from "lucide-react";
 import { FC, useEffect, useState } from "react";
-import { CommentComponent } from "~/components/comment-component";
 import { StoryComponent } from "~/components/story-component";
+import { SubmissionComment } from "~/components/submission-comment";
 import { API_URL } from "~/constants/api-url";
 import type { Submission } from "~/types";
 
@@ -57,11 +57,7 @@ export const SubmissionsFeed: FC<SubmissionsFeedProps> = ({ submissionIds }) => 
     <div className="grid grid-flow-row gap-2">
       {submissions.map((submission) => {
         if (submission.type === "comment" && !submission.deleted) {
-          return (
-            <div className="bg-neutral-800 p-2 rounded-md">
-              <CommentComponent comment={submission} />
-            </div>
-          );
+          return <SubmissionComment comment={submission} />;
         }
         if (submission.type === "story") {
           return <StoryComponent story={submission} />;
